@@ -40,11 +40,13 @@ tail -f logs/catalina.out
 
 http://服务器地址:8080/jenkins
 
-![img](file:///C:\Users\fandeshan\AppData\Local\Temp\ksohtml19980\wps10.jpg) 
+![img](./img/wps10.jpg) 
 
-![img](file:///C:\Users\fandeshan\AppData\Local\Temp\ksohtml19980\wps11.jpg) 
 
-![img](file:///C:\Users\fandeshan\AppData\Local\Temp\ksohtml19980\wps12.jpg) 
+
+![img](./img/wps11.jpg) 
+
+![img](./img/wps12.jpg) 
 
  
 

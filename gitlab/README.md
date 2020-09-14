@@ -72,7 +72,7 @@ rpm -ivh gitlab-ce-10.2.2-ce.0.el7.x86_64.rpm   #安装gitlab
 
 
 
-![img](file:///C:\Users\fandeshan\AppData\Local\Temp\ksohtml19980\wps7.jpg) 
+![img](./img/wps7.jpg) 
 
 根据安装完成提示界面进行访问URL更改及重新加载配置文件 更改次选项为自己的域名或者IP   external_url 'http://gitlab.example.com'
 
@@ -90,7 +90,7 @@ gitlab-ctl reconfigure   #重新加载配置文件
 
 重装完成访问http://192.168.1.21，会首先叫更改密码（root用户），改完后登录。如下界面：
 
-![img](file:///C:\Users\fandeshan\AppData\Local\Temp\ksohtml19980\wps8.jpg) 
+![img](./img/wps8.jpg) 
 
 #### 汉化
 
@@ -139,4 +139,4 @@ gitlab-ctl reconfigure
 
 汉化完成后再次刷新页面如下
 
-![img](file:///C:\Users\fandeshan\AppData\Local\Temp\ksohtml19980\wps9.jpg) 
+![img](./img/wps9.jpg) 

@@ -3,22 +3,13 @@ package main
 import "fmt"
 
 func main() {
-	fmt.Printf("%b",-1)
-	fmt.Printf("%x",-1)
+	fmt.Println(getSum(1,2))
+	fmt.Println(getSum(-2,3))
 }
 
 func getSum(a int, b int) int {
-	sum :=0
-	//nextAdd := false
-	for a !=0 && b != 0  {
-		a1 := a & 1
-		b1 := b & 1
-		if a1 & b1 == 1 {
-			//nextAdd = true
-		}else if a1 | b1 == 1 {
-
-		}
-
+	if b == 0 {
+		return a
 	}
-	return sum
+	return getSum(a^b,(a&b)<<1)
 }

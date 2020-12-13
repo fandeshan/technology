@@ -1,7 +1,9 @@
 package main
 
+import "fmt"
+
 func main() {
-	
+	fmt.Println(containsDuplicate([]int{1,2,3,4}))
 }
 
 func containsDuplicate(nums []int) bool {

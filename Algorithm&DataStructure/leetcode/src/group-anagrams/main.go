@@ -3,8 +3,9 @@ package main
 import "fmt"
 
 func main() {
-	fmt.Println(groupAnagrams([]string{"eat", "tea", "tan", "ate", "nat", "bat"}))
-	fmt.Println(groupAnagrams([]string{"", ""}))
+	fmt.Println(isPrimiary(103))
+	fmt.Println(groupAnagrams1([]string{"eat", "tea", "tan", "ate", "nat", "bat"}))
+	fmt.Println(groupAnagrams1([]string{"", ""}))
 }
 
 func groupAnagrams(strs []string) [][]string {
@@ -44,4 +45,44 @@ func groupAnagrams(strs []string) [][]string {
 		}
 	}
 	return result
+}
+
+
+
+
+func groupAnagrams1(strs []string) [][]string {
+	var primeList = []int{2,3,5,7,11,13,17,19,23,29,31,37,41,43,47,53,59,61,67,71,73,79,83,89,97,101}
+
+	var multi func(string) int
+	multi = func(a string) int {
+		multiVal :=1
+		for i:=0; i<len(a); i++ {
+			multiVal *= primeList[int(a[i]-'a')]
+		}
+		return multiVal
+	}
+	result := make([][]string,0)
+	resultMaps := make(map[int]int,0)
+	j := 0
+	for i:=0; i<len(strs); i++ {
+		multiVal := multi(strs[i])
+		if v,ok := resultMaps[multiVal];ok {
+			result[v] = append(result[v],strs[i])
+		} else {
+			result = append(result,[]string{strs[i]})
+			resultMaps[multiVal] = j
+			j ++
+		}
+	}
+	return result
+}
+
+
+func isPrimiary(n int) bool{
+	for i := 2; i < n ; i++ {
+		if n%i == 0 {
+			return false
+		}
+	}
+	return true
 }

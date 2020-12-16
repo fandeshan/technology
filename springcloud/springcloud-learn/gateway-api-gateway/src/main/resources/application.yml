@@ -1,0 +1,58 @@
+spring:
+  application:
+    name: gateway-api-gateway
+  cloud:
+    gateway:
+      routes:
+        - id: config_route
+          predicates:
+            - Path=/gateway/**
+          filters:
+            - StripPrefix=1
+            - MyDefine=hello fandeshan
+          uri: http://www.fandeshan.top
+        - id: auth_route
+          predicates:
+            - Path=/define/**
+            - Auth=Authorization
+          filters:
+            - StripPrefix=1
+          uri: http://www.fandeshan.top
+        - id: lb_route
+          predicates:
+            - Path=/lb/**
+          filters:
+            - StripPrefix=1
+          uri: lb://eureka-order-service
+        - id: ratelimiter_route
+          predicates:
+            - Path=/ratelimiter/**
+          filters:
+            - name: RequestRateLimiter
+              args:
+                deny-empty-key: true
+                keyResolver: '#{@ipAddressKeyResolver}'
+                replenishRate: 1
+                burstCapacity: 2
+          uri: lb://eureka-order-service
+
+      discovery:
+        locator:
+          enabled: true
+          lower-case-service-id: true
+  redis:
+    host: 127.0.0.1
+    port: 6379
+server:
+  port: 8090
+eureka:
+  instance:
+    prefer-ip-address: true
+  client:
+    service-url:
+      defaultZone: http://localhost:8899/registry-server/eureka/
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"

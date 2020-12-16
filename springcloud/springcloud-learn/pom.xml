@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>2.1.18.RELEASE</version>
+    </parent>
+    <groupId>priv.fandeshan.demo</groupId>
+    <artifactId>springcloud-learn</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+    <name>springcloud-learn</name>
+    <packaging>pom</packaging>
+    <description>Demo project for Spring Cloud Learn</description>
+
+    <properties>
+        <java.version>1.8</java.version>
+        <spring-cloud.version>Greenwich.SR4</spring-cloud.version>
+<!--        <spring-cloud.version>Hoxton.SR9</spring-cloud.version>-->
+    </properties>
+    <modules>
+        <module>eureka-registry-server</module>
+        <module>eureka-order-service</module>
+        <module>config-config-server</module>
+        <module>ribbon-user-service</module>
+        <module>hystrix-hystrix-dashboard</module>
+        <module>gateway-api-gateway</module>
+        <module>my-mall-commons</module>
+        <module>my-mall-goods-services</module>
+    </modules>
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-dependencies</artifactId>
+                <version>${spring-cloud.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+<!--            <dependency>-->
+<!--                <groupId>org.springframework.cloud</groupId>-->
+<!--                <artifactId>spring-cloud-config-client</artifactId>-->
+<!--                <version>2.1.3.RELEASE</version>-->
+<!--            </dependency>-->
+        </dependencies>
+    </dependencyManagement>
+    <dependencies>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <optional>true</optional>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-webmvc</artifactId>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <source>1.8</source>
+                    <target>1.8</target>
+                    <encoding>UTF-8</encoding>
+                </configuration>
+                <!--				<groupId>org.springframework.boot</groupId>-->
+                <!--				<artifactId>spring-boot-maven-plugin</artifactId>-->
+            </plugin>
+        </plugins>
+    </build>
+
+</project>

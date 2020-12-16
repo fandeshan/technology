@@ -1,0 +1,2 @@
+org.springframework.cloud.bootstrap.BootstrapConfiguration=\
+  priv.fandeshan.demo.eurekaorderservice.sourceloader.JsonProperySourceLocator

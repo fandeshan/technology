@@ -1,0 +1,8 @@
+{
+  "custom": {
+    "property" : {
+      "hello" : "hello mine!"
+    }
+  },
+  "value": "bbb"
+}

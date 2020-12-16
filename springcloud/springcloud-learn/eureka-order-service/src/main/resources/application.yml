@@ -1,0 +1,30 @@
+server:
+  port: 8801
+  servlet:
+    context-path: /order-service
+spring:
+  application:
+    name: eureka-order-service
+  datasource:
+    url: jdbc:mysql://localhost:3306/my_mall?useUnicode=true&characterEncoding=utf8&useOldAliasMetadataBehavior=true&zeroDateTimeBehavior=convertToNull&allowMultiQueries=true&serverTimezone=UTC
+    password: 123456
+    username: root
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  messages:
+    basename: META-INF/locale/messages
+hystrix:
+  command:
+    default: #全局配置，如果要配置某个类，即feignclient#method(param)
+      execution:
+        timeout:
+          enable: true
+        isolation:
+          thread:
+            timeoutInMilliseconds: 30000
+ribbon:
+  ReadTimeout: 10000
+  ConnectTimeout: 10000
+mybatis:
+  type-aliases-package: priv.fandeshan.demo.eurekaorderservice.mapper.entitys
+  config-location: classpath:/mybatis-config.xml
+

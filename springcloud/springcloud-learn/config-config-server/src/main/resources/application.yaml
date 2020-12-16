@@ -1,0 +1,20 @@
+
+
+eureka:
+  instance:
+    prefer-ip-address: true
+  client:
+    service-url:
+      defaultZone: http://localhost:8899/registry-server/eureka/
+server:
+  port: 8877
+spring:
+  application:
+    name: config-server
+  cloud:
+    config:
+      server:
+        native:
+          search-locations: classpath:/config,C:\\data\\config
+  profiles:
+    active: native

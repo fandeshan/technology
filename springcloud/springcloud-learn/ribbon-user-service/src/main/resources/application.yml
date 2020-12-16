@@ -1,0 +1,32 @@
+hystrix:
+  command:
+    default: #全局配置，如果要配置某个类，即feignclient#method(param)
+      execution:
+        timeout:
+          enable: true
+        isolation:
+          thread:
+            timeoutInMilliseconds: 3000
+    OrderServiceFeignClient#getOrder(Integer):
+      execution:
+        isolation:
+          #基于信号量隔离的策略
+          strategy: SEMAPHORE
+          semaphore:
+            maxConcurrentRequests: 10
+    OrderServiceFeignClient#insert(Integer):
+      execution:
+        isolation:
+          #基于线程隔离的策略
+          strategy: THREAD
+  threadpool:
+    order-service:
+      coreSize: 2
+      maxQueueSize: 1000
+      queueSizeRejectionThreshold: 800
+management:
+  endpoint:
+  endpoints:
+    web:
+      exposure:
+        include: refresh,hystrix.stream

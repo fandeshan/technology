@@ -1,0 +1,23 @@
+server:
+  port: 8804
+  servlet:
+    context-path: /mall-goods-services
+eureka:
+  instance:
+    prefer-ip-address: true
+  client:
+    service-url:
+      defaultZone: http://localhost:8899/registry-server/eureka/
+spring:
+  application:
+    name: mall-goods-services
+  datasource:
+    url: jdbc:mysql://localhost:3306/my_mall?useUnicode=true&characterEncoding=utf8&useOldAliasMetadataBehavior=true&zeroDateTimeBehavior=convertToNull&allowMultiQueries=true&serverTimezone=UTC
+    password: 123456
+    username: root
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  messages:
+    basename: META-INF/locale/messages
+mybatis:
+  type-aliases-package: priv.fandeshan.demo.mymallgoodsservices.mapper.entitys
+  config-location: classpath:/mybatis-config.xml

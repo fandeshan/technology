@@ -1,0 +1,18 @@
+spring:
+  application:
+    name: eureka-registry-server
+server:
+  port: 8899
+  servlet:
+    context-path: /registry-server
+eureka:
+  instance:
+    prefer-ip-address: true
+  client:
+    service-url:
+      defaultZone: http://localhost:8899/registry-server/eureka/
+    register-with-eureka: false
+    fetch-registry: false
+  server:
+    enable-self-preservation: false
+    eviction-interval-timer-in-ms: 60000

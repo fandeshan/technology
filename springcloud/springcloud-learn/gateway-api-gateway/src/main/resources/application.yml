@@ -24,6 +24,12 @@ spring:
           filters:
             - StripPrefix=1
           uri: lb://eureka-order-service
+        - id: user_route
+          predicates:
+            - Path=/user/**
+          filters:
+            - StripPrefix=1
+          uri: lb://user-service
         - id: ratelimiter_route
           predicates:
             - Path=/ratelimiter/**

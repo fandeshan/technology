@@ -55,7 +55,7 @@ public class HystrixTestController {
            //超时熔断
             @HystrixProperty(name = "execution.isolation.thread.timeoutInMilliseconds",value = "3000")
     },fallbackMethod = "fallbackTimeout")
-    @GetMapping( value ="/orders/{orderId}")
+    @GetMapping( value ="/ordersTime/{orderId}")
     public String getOrderTimeout(@PathVariable("orderId") Integer orderId){
         return "成功！，经过order-service查询，"+orderServiceFeignClient.getOrder(orderId);
     }

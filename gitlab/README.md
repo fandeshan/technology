@@ -140,3 +140,42 @@ gitlab-ctl reconfigure
 汉化完成后再次刷新页面如下
 
 ![img](./img/wps9.jpg) 
+
+
+
+#### 内存占用过高问题
+
+修改gitlab.rb文件
+
+```shell
+vim /etc/gitlab/gitlab.rb
+```
+
+修改内容如下
+
+```shell
+unicorn['worker_processes'] = 2  ##减少工作进程数
+unicorn['worker_memory_limit_min'] = "200 * 1 << 20"  ##限制最小工作内存200M
+unicorn['worker_memory_limit_max'] = "350 * 1 << 20"  ##限制最大工作内存300M
+sidekiq['concurrency'] = 16    ##限制sidekiq的并发数
+postgresql['shared_buffers'] = "256MB"  ##设置数据库缓存大小
+postgresql['max_worker_processes'] = 8  ##设置数据库并发
+```
+
+修改完成之后重新加载配置
+
+```shell
+gitlab-ctl reconfigure
+```
+
+可以看到加载完成
+
+![image-20201223173528742](./img/reconfigure_success.png)
+
+重新启动gitlab
+
+```shell
+gitlab-ctl restart
+```
+
+![image-20201223173805281](./img/restart_success.png)

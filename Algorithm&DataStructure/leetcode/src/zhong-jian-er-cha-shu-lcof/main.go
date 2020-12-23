@@ -20,18 +20,17 @@ func buildTree(preorder []int, inorder []int) *TreeNode {
 	if len(preorder) < 1 {
 		return nil
 	}
-	root := &TreeNode{
-		Val:   preorder[0],
-		Left:  nil,
-		Right: nil,
-	}
-	parent := root
-	tail := root
-	for i := 0; i<len(inorder) ;i++  {
-		for j:=0;j<len(preorder) ;j++  {
-			if inorder[i] == preorder[j] {
-
-			}
+	i:=0
+	for ;i < len(inorder);i++{
+		if inorder[i] == preorder[0] {
+			break
 		}
 	}
+	node := &TreeNode{
+		Val: preorder[0],
+
+	}
+	node.Left = buildTree(preorder[1:i+1],inorder[:i])
+	node.Right = buildTree(preorder[i+1:],inorder[i+1:])
+	return node
 }

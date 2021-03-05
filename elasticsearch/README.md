@@ -1,6 +1,9 @@
 安装高可用es
 安装jdk
 解压jar包到
+`
+aaa
+`java`
 # java -version  命令检查该主机上是否已经安装java，如果已经安装则跳过该步骤 
 cd /root/apps/
 mkdir -p /app/

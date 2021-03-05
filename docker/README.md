@@ -79,7 +79,7 @@ docker login -u name -p pasword 20.250.204.146:6110
 
 ## 准备工作
 
-操作前需要确保我们已经在本机上安装好了docker 以及docker compose
+操作前需要确保我们已经在本机上安装好了docker
 
 
 ## 操作步骤

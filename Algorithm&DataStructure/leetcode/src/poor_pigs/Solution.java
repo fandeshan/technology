@@ -40,7 +40,25 @@ package poor_pigs;
  * 著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
  * @date 2021/11/25
  */
+
 public class Solution {
+    /**
+     *   1  2  3  4  5
+     *   6  7  8  9 10
+     *  11 12 13 14 15
+     *  16 17 18 19 20
+     *  21 22 23 24 25
+     *  假设有如上 5*5 的桶，一个猪负责一个维度，比如有两个猪，一个负责行，一个负责列
+     *  第一次，一只猪负责第一行，一只猪负责第一列，都没死
+     *  第二次，一只猪负责第二行，一只猪负责第二列，都没死
+     *  ....
+     *  第四次，一只猪负责第四行，一只猪负责第四列，都没死
+     *  即找到毒药
+     *
+     * 得 四次能找到 (4+1)^2个桶
+     *
+     *
+     */
     public int poorPigs(int buckets, int minutesToDie, int minutesToTest) {
         int pigs = 0;
         while (Math.pow(minutesToTest/minutesToDie+1,pigs) < buckets){

@@ -89,7 +89,7 @@ public class Solution {
         for (int j = 0; j < nums[i].length; j++) {
             if (tmpSet.contains(nums[i][j])){
                 sumCount2 += Math.pow(3,nums.length - i -1);
-                return ;
+                continue ;
             }
             tmpSet.add(nums[i][j]);
             dfs2(nums,i+1,tmpSet);
@@ -100,7 +100,21 @@ public class Solution {
     public static void main(String[] args) {
         System.out.println(new Solution().counterRepeats2(new int[][]
                 {{1,2,3},{2,3,4},{3,5,6}}));
+//        System.out.println(new Solution().counterRepeats1(new int[][]
+//                {{1,2,3},{1,2,3},{1,2,4},{1,5,6}}));
+//        System.out.println(new Solution().counterRepeats2(new int[][]
+//                {{1,2,3},{1,2,3},{1,2,4},{1,5,6}}));
+        long start1 = System.currentTimeMillis();
+        System.out.println(new Solution().counterRepeats1(new int[][]
+                {{1,2,3},{1,2,3},{1,2,4},{1,5,6},{3,7,9},{3,5,6},{4,8,7},{2,1,5},{2,1,8},{3,8,9},{5,6,9},{7,1,8}}));
+        System.out.println("cost time1:"+(System.currentTimeMillis() - start1));
+        long start2 = System.currentTimeMillis();
         System.out.println(new Solution().counterRepeats2(new int[][]
-                {{1,2,3},{1,2,3},{1,2,4},{1,5,6}}));
+                {{1,2,3},{1,2,3},{1,2,4},{1,5,6},{3,7,9},{3,5,6},{4,8,7},{2,1,5},{2,1,8},{3,8,9},{5,6,9},{7,1,8}}));
+        System.out.println("cost time2:"+(System.currentTimeMillis() - start2));
+        long start3 = System.currentTimeMillis();
+        System.out.println(new Solution().counterRepeats(new int[][]
+                {{1,2,3},{1,2,3},{1,2,4},{1,5,6},{3,7,9},{3,5,6},{4,8,7},{2,1,5},{2,1,8},{3,8,9},{5,6,9},{7,1,8}}));
+        System.out.println("cost time3:"+(System.currentTimeMillis() - start3));
     }
 }

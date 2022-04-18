@@ -34,7 +34,7 @@ import java.util.List;
 public class Solution {
     public List<Integer> lexicalOrder(int n) {
         List<Integer> result = new ArrayList<>();
-        for (int i = 1; i < 9; i++) {
+        for (int i = 1; i < 10; i++) {
             dfs(i,n,result);
         }
         return result;
@@ -45,7 +45,7 @@ public class Solution {
         }
         result.add(i);
         int tmp = i*10;
-        for (int j = 0; j < 9 ; j++) {
+        for (int j = 0; j < 10 ; j++) {
             dfs(tmp+j,n,result);
         }
     }

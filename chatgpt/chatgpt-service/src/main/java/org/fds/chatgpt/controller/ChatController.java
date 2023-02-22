@@ -1,23 +1,17 @@
 package org.fds.chatgpt.controller;
 
-import org.apache.http.HttpEntity;
-import org.apache.http.client.methods.CloseableHttpResponse;
-import org.apache.http.client.methods.HttpPost;
-import org.apache.http.entity.ContentType;
-import org.apache.http.entity.StringEntity;
-import org.apache.http.entity.mime.HttpMultipartMode;
-import org.apache.http.entity.mime.MultipartEntity;
-import org.apache.http.impl.client.CloseableHttpClient;
-import org.apache.http.util.EntityUtils;
-import org.fds.chatgpt.uitls.SSLClient;
+import net.sf.json.JSONObject;
+import org.fds.chatgpt.service.SSeServer;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.messaging.handler.annotation.MessageMapping;
-import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.method.annotation.SseEmitter;
 
-import java.nio.charset.Charset;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
-import java.util.concurrent.ThreadPoolExecutor;
 
 /**
  * @author fandeshan
@@ -79,6 +73,26 @@ public class ChatController {
         messageThread.message = "测试，你好";
         executorService.execute(messageThread);
         return "Hello client:"+message;
+    }
+
+    @Autowired
+    private SSeServer sSeServer;
+
+    @GetMapping(value = "/chatAI/textCompletionStream",produces = MediaType.TEXT_EVENT_STREAM_VALUE)
+    public SseEmitter getChatAITextCompletionStream(@RequestParam(required = true)String requestMessage,
+                                                    @RequestParam(required = false)String conversationId) {
+
+        SseEmitter sseEmitter = new SseEmitter(120000L);
+        ExecutorService executor = Executors.newSingleThreadExecutor();
+
+        executor.submit(() ->
+        {
+            JSONObject requestJson = sSeServer.genTextCompleteRequestJson(requestMessage, null);
+            sSeServer.callTextCompletionBySse(requestJson.toString(),sseEmitter);
+
+        });
+
+        return sseEmitter;
     }
 
 

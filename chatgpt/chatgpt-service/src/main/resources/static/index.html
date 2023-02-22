@@ -9,14 +9,15 @@ Welcome<br/>
 <div id="message">
 </div>
 </body>
+
 <script type="text/javascript">
     var websocket = null;
     //判断当前浏览器是否支持WebSocket
     if('WebSocket' in window){
-        //index = new WebSocket("ws://localhost:8080/web/socket/20");
-        //index = new WebSocket("ws://localhost:8101/big-screen/bigsocket/chatai/20");
-		//index = new WebSocket("ws://192.168.30.50:8101/big-screen/bigsocket/chatai/20");
-		index = new WebSocket("wss://cpsetest.cpgroup.cn:13080/big-screen/bigsocket/chatai/20");
+        index = new WebSocket("ws://localhost:8080/web/socket/20");
+        //index = new WebSocket("ws://localhost:8101/bigsocket/chatai/20");
+		//index = new WebSocket("ws://192.168.30.50:8101/bigsocket/chatai/20");
+		//index = new WebSocket("wss://192.168.30.50:13080/bigsocket/chatai/20");
     }
     else{
         alert('Not support websocket')
@@ -55,5 +56,76 @@ Welcome<br/>
         document.getElementById('message').innerHTML +=  '<br/>';
         index.send(message);
     }
+
+
 </script>
+
+
+<script type="text/javascript">
+
+    //import { EventSourcePolyfill } from './event-source-polyfill';
+
+    function send2(){
+        // const headers = new Headers();
+        // headers.append('Authorization', 'Bearer my_token');
+        //
+        // fetch('https://example.com/sse', {
+        //     headers: headers,
+        // })
+        // .then(response => {
+            let message = document.getElementById('text').value;
+            let conversationId = '3b567fcc5e30412ba1a0f2eccbdffe99';
+            let pdAuthToken = 'xxx'
+            let data = new EventSource("https://192.168.30.50:13080/chatAI/textCompletionStream?requestMessage="+message+"&conversationId="+conversationId+"&pdAuthToken="+pdAuthToken)
+
+            data.onopen = function(event){
+                document.getElementById('message').innerHTML += '<br/>准备就绪，开始接收服务端数据：<br/>' ;
+            };
+            data.onmessage = function(event){
+                console.log("test=>",event)
+                document.getElementById('message').innerHTML += event.data ;
+            };
+
+            data.addEventListener('finish',function(event){
+                data.close();
+                document.getElementById('message').innerHTML += '<br/>数据接受完毕，通知服务端关闭EventSource：<br/>' ;
+            });
+            data.onerror = function(event){
+                if (event.readyState == EventSource.CLOSED){
+                    document.getElementById('message').innerHTML += '<br/>SSE连接已关闭<br/>' ;
+                } else {
+                    console.log(event);
+                    data.close();
+                }
+            };
+        // })
+        // .catch(error => {
+        //     console.error('Error:', error);
+        // });
+
+
+    }
+
+    function send3(){
+        let xhr = new XMLHttpRequest();
+
+        let message = document.getElementById('text').value;
+        let conversationId = '3b567fcc5e30412ba1a0f2eccbdffe99';
+        xhr.open('GET', "http://192.168.1.9:13080/chatAI/textCompletionStream?requestMessage="+message+"&conversationId="+conversationId);
+        xhr.setRequestHeader('x-dp-auth-token', 'xxx');
+        xhr.responseType = 'text/event-stream';
+        xhr.onreadystatechange = function() {
+            if (xhr.readyState == 3) {
+                // 每次接收到新的数据都会触发onprogress事件
+                let data = xhr.responseText;
+                document.getElementById('message').innerHTML += data ;
+            } else if (xhr.readyState == 4) {
+                document.getElementById('message').innerHTML += '<br/>数据接受完毕，通知服务端关闭EventSource：<br/>' ;
+            }
+        };
+        xhr.send();
+
+    }
+</script>
+
 </html>
